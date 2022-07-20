@@ -1,0 +1,74 @@
+@startuml
+
+class HangMan {
+    +NumberOfPlayers
+    +TurnHangMan turnhangman
+    {abstract}Introduction()
+    +Resume()
+    {abstract}Execute()
+    {abstract}AssignRoles()
+    +SelectPlayers()
+}
+abstract class Player {
+    +IdPlayer int
+    +PlayerName String
+    +ThrowDice()
+}
+class SecretWord {
+    +Char GivenWords []
+    +Char GuesserWords []
+    +boolean AddLetter(Char letter)
+    +boolean isGuesser ()
+    +printGuessedWord()
+}
+class TurnHangMan {
+    +HangManPlayer Giver
+    +HangManPlayer Guesser
+    +SecretWord secretword
+    +HangedMan hangedman
+}
+class HangedMan {   
+    +ATTEMPTS    
+    +FailedAttempts
+    +PaintHangedMan()
+    +isDead()
+}
+class Dice {
+    +RollTheDice()
+}
+
+class ListOfPlayers {
+    +Player [] players
+    +CreatePlayer()
+    +GetPlayer()
+}
+
+interface HangManPlayer {
+    +ChooseWord()
+    +GiveLetter()
+}
+
+class Bot {
+    +ChooseWord()
+    +GiveLetter()
+}
+class Human {
+    +ChooseWord()
+    +GiveLetter()
+}
+
+HangMan o-- Player
+HangMan *--TurnHangMan
+TurnHangMan*-- SecretWord
+TurnHangMan*-- HangedMan
+Player <|-- Bot
+Player <|-- Human
+Player ..|>HangManPlayer
+TurnHangMan *-- Player
+
+Player-->Dice
+
+HangMan ..> ListOfPlayers
+HangMan ..>Dice
+
+@enduml

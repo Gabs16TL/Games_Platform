@@ -1,0 +1,27 @@
+@startuml Tictactoe
+
+class TicTacToe
+interface TicTacToePlayer
+abstract class Player
+class Turn
+class Board
+
+Enum Piece
+Class ListOfPlayer
+Class Human
+Class Bot
+
+
+TicTacToe *-- Turn
+Turn *-- TicTacToePlayer
+TicTacToe *-- Player
+Board *-- Piece
+TicTacToe ..> ListOfPlayer
+ListOfPlayer *-- Player
+Turn *-- Board
+Player ..|> TicTacToePlayer
+Player <|-- Human
+Player <|-- Bot
+Turn --> Player
+
+@enduml

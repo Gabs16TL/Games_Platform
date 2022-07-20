@@ -1,0 +1,69 @@
+@startuml
+
+class GamesPlatform {
+    +ListOfPlayers
+    +ShowStatistics()
+    +PlayGame()
+    +Game [] games
+    +ShowMenu()
+}
+abstract class Game {
+    +NumberOfPlayers
+    {abstract}Introduction()
+    +Resume()
+    {abstract}Execute()
+    {abstract}AssignRoles()
+    +SelectPlayers()
+}
+class TicTacToe {
+
+}
+class HangMan {
+    
+}
+abstract class Player {
+    +IdPlayer int
+    +PlayerName String
+    +ThrowDice()
+}
+
+
+interface HangManPlayer{
+
+}
+
+interface TicTacToePlayer {
+
+}
+
+class ListOfPlayers {
+    
+    +Player [] players
+    +CreatePlayer()
+    +GetPlayer()
+}
+
+class Bot {
+
+}
+class Human {
+
+}
+
+GamesPlatform *-- "10" Player
+GamesPlatform *-- "2" Game
+GamesPlatform *-- ListOfPlayers
+
+Game <|-- TicTacToe
+Game <|-- HangMan
+Game o--Player
+Player <|-- Bot
+Player <|-- Human
+Player ..|>HangManPlayer
+Player ..|>TicTacToePlayer
+
+Game ..> ListOfPlayers
+
+ListOfPlayers --* Player
+
+@enduml
