@@ -1,15 +1,65 @@
 @startuml Tictactoe
 
-class TicTacToe
-interface TicTacToePlayer
-abstract class Player
-class Turn
-class Board
+class TicTacToe {
+     +NumberOfPlayers
+    +TurnTicTacToe turntictactoe
+    {abstract}Introduction()
+    +Resume()
+    {abstract}Execute()
+    {abstract}AssignRoles()
+    +SelectPlayers()
+    
+}
 
-Enum Piece
-Class ListOfPlayer
-Class Human
-Class Bot
+interface TicTacToePlayer {
+    +putMark()
+}
+
+class Dice {
+    +RollTheDice()
+}
+
+abstract class Player {
+    +IdPlayer int
+    +PlayerName String
+    +ThrowDice()
+}
+
+class Turn {
+    +TicTacToePlayer playerX
+    +TicTacToePlayer playerO
+    +Board board
+    +playTurn()
+    +getResult()
+}
+class Board {
+    +Piece[][] piece
+    +EmptySquare: int
+    +isFull()
+    +paintBoard()
+    +checkWinner()
+    +putPiece(int x, int y, Piece typeOfPiece)
+}
+
+Enum Piece {
+   X,
+   O,
+   Empty
+}
+
+Class ListOfPlayer {
+    +Player [] players
+    +CreatePlayer()
+    +GetPlayer()
+}
+
+Class Human {
+    +putMark()
+}
+
+Class Bot {
+  +putMark()
+}
 
 
 TicTacToe *-- Turn
@@ -23,5 +73,7 @@ Player ..|> TicTacToePlayer
 Player <|-- Human
 Player <|-- Bot
 Turn --> Player
+TicTacToe ..> Dice
+Player ..> Dice
 
 @enduml
