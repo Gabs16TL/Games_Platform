@@ -1,3 +1,7 @@
+import game.Game;
+import game.hangman.HangMan;
+import game.tictactoe.TicTacToe;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
