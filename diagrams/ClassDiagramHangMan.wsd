@@ -32,6 +32,11 @@ class HangedMan {
     +isDead()
 }
 
+interface HangManPlayer {
+    +ChooseWord()
+    +GiveLetter()
+}
+
 }
 
 package player {
@@ -48,10 +53,6 @@ class ListOfPlayers {
     +GetPlayer()
 }
 
-interface HangManPlayer {
-    +ChooseWord()
-    +GiveLetter()
-}
 
 class Bot {
     +ChooseWord()
