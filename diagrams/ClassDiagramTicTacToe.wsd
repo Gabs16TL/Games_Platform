@@ -1,5 +1,7 @@
 @startuml Tictactoe
 
+
+
 class TicTacToe {
      +NumberOfPlayers
     +TurnTicTacToe turntictactoe
@@ -8,23 +10,50 @@ class TicTacToe {
     {abstract}Execute()
     {abstract}AssignRoles()
     +SelectPlayers()
-    
 }
 
-interface TicTacToePlayer {
-    +putMark()
-}
 
-class Dice {
-    +RollTheDice()
-}
 
+package player {
 abstract class Player {
     +IdPlayer int
     +PlayerName String
     +ThrowDice()
 }
+Class ListOfPlayer {
+    +Player [] players
+    +CreatePlayer()
+    +GetPlayer()
+}
 
+Class Human {
+    +putMark()
+}
+
+Class Bot {
+  +putMark()
+}
+interface TicTacToePlayer {
+    +putMark()
+}
+}
+
+
+
+
+package util {
+class Dice {
+    +RollTheDice()
+}
+Enum Piece {
+   X,
+   O,
+   Empty
+}
+}
+
+
+package ttt {
 class Turn {
     +TicTacToePlayer playerX
     +TicTacToePlayer playerO
@@ -40,26 +69,12 @@ class Board {
     +checkWinner()
     +putPiece(int x, int y, Piece typeOfPiece)
 }
-
-Enum Piece {
-   X,
-   O,
-   Empty
 }
 
-Class ListOfPlayer {
-    +Player [] players
-    +CreatePlayer()
-    +GetPlayer()
-}
 
-Class Human {
-    +putMark()
-}
 
-Class Bot {
-  +putMark()
-}
+
+
 
 
 TicTacToe *-- Turn

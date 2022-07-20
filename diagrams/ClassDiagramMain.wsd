@@ -1,5 +1,6 @@
 @startuml
 
+
 class GamesPlatform {
     +ListOfPlayers
     +ShowStatistics()
@@ -7,6 +8,9 @@ class GamesPlatform {
     +Game [] games
     +ShowMenu()
 }
+
+package game {
+
 abstract class Game {
     +NumberOfPlayers
     {abstract}Introduction()
@@ -21,12 +25,16 @@ class TicTacToe {
 class HangMan {
     
 }
+
+}
+
+
+package player {
 abstract class Player {
     +IdPlayer int
     +PlayerName String
     +ThrowDice()
 }
-
 
 interface HangManPlayer{
 
@@ -49,6 +57,9 @@ class Bot {
 class Human {
 
 }
+
+}
+
 
 GamesPlatform *-- "10" Player
 GamesPlatform *-- "2" Game

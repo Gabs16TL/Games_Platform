@@ -1,5 +1,7 @@
 @startuml
 
+package hangman {
+
 class HangMan {
     +NumberOfPlayers
     +TurnHangMan turnhangman
@@ -9,11 +11,7 @@ class HangMan {
     {abstract}AssignRoles()
     +SelectPlayers()
 }
-abstract class Player {
-    +IdPlayer int
-    +PlayerName String
-    +ThrowDice()
-}
+
 class SecretWord {
     +Char GivenWords []
     +Char GuesserWords []
@@ -33,8 +31,15 @@ class HangedMan {
     +PaintHangedMan()
     +isDead()
 }
-class Dice {
-    +RollTheDice()
+
+}
+
+package player {
+
+abstract class Player {
+    +IdPlayer int
+    +PlayerName String
+    +ThrowDice()
 }
 
 class ListOfPlayers {
@@ -56,6 +61,19 @@ class Human {
     +ChooseWord()
     +GiveLetter()
 }
+
+}
+
+package utils {
+
+class Dice {
+    +RollTheDice()
+}
+
+}
+
+
+
 
 HangMan o-- Player
 HangMan *--TurnHangMan
