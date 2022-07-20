@@ -25,8 +25,8 @@ public class GamesPlatform {
                 switch (option) {
                     case 1: showPlayers(); break;
                     case 2: createPlayer(); break;
-                    case 3: playGame(new games[0]); break;
-                    case 4: playGame(new games[1]); break;
+                    case 3: playGame(games[0]); break;
+                    case 4: playGame(games[1]); break;
                     case 5: exit = true; break;
                     default: System.out.println("Must be a number between 1 and 5"); break;
                 }
