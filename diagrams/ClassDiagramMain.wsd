@@ -1,7 +1,7 @@
 @startuml
 
 class GamesPlatform {
-    +ListOfPlayers
+    +GamePlayersProvider listOfPlayers
     +showPlayersList()
     +createPlayer()
     +PlayGame(Game game)
@@ -11,6 +11,8 @@ class GamesPlatform {
 
 package game {
     abstract class Game {
+        - GamePlayer[] gamePlayers
+        - GamePlayersProvider gamePlayersProvider
         +NumberOfPlayers
         {abstract}Introduction()
         +Resume()
@@ -18,18 +20,27 @@ package game {
         {abstract}AssignRoles()
         +SelectPlayers()
     }
-    class TicTacToe {
+    package tictactoe {
+        class TicTacToe {
 
+        }
+        interface TicTacToePlayer {
+
+        }
     }
-    class HangMan {
-        
+    package hangman {
+        class HangMan {
+            
+        }
+        interface HangManPlayer{
+
+        }
     }
-    interface HangManPlayer{
-
+    interface GamePlayer {
+        + processResult(Result)
     }
-
-    interface TicTacToePlayer {
-
+    interface GamePlayersProvider {
+        + getGamePlayers(int) : GamePlayer[]
     }
 }
 
@@ -40,8 +51,7 @@ package player {
         +ThrowDice()
     }
     class ListOfPlayers {
-        
-        +Player [] players
+        +Player[] players
         +CreatePlayer()
         +GetPlayer()
     }
@@ -54,20 +64,25 @@ package player {
 }
 
 GamesPlatform *-- "2" Game
-GamesPlatform *-- ListOfPlayers
+GamesPlatform *-- GamePlayersProvider
 
 Game <|-- TicTacToe
 Game <|-- HangMan
+Game -right-> GamePlayersProvider
+
 Player <|-- Bot
 Player <|-- Human
-Player ..|>HangManPlayer
-Player ..|>TicTacToePlayer
+Player ..|> GamePlayer
 
-Game ..> ListOfPlayers
+Game *-- GamePlayer
 
 ListOfPlayers *-- Player
+ListOfPlayers ..|> GamePlayersProvider
 
 TicTacToe *-- TicTacToePlayer
 HangMan *-- HangManPlayer
+
+GamePlayer ..|> TicTacToePlayer
+GamePlayer ..|> HangManPlayer
 
 @enduml
