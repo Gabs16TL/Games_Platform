@@ -1,93 +1,85 @@
 @startuml
 
 package hangman {
+    class HangMan {
+        +NumberOfPlayers
+        +TurnHangMan turnhangman
+        {abstract}Introduction()
+        +Resume()
+        {abstract}Execute()
+        {abstract}AssignRoles()
+        +SelectPlayers()
+    }
+    class SecretWord {
+        +Char GivenWords []
+        +Char GuesserWords []
+        +boolean AddLetter(Char letter)
+        +boolean isGuesser ()
+        +printGuessedWord()
+    }
+    class TurnHangMan {
+        +HangManPlayer Giver
+        +HangManPlayer Guesser
+        +SecretWord secretword
+        +HangedMan hangedman
+    }
+    class HangedMan {   
+        +ATTEMPTS    
+        +FailedAttempts
+        +PaintHangedMan()
+        +isDead()
+    }
 
-class HangMan {
-    +NumberOfPlayers
-    +TurnHangMan turnhangman
-    {abstract}Introduction()
-    +Resume()
-    {abstract}Execute()
-    {abstract}AssignRoles()
-    +SelectPlayers()
-}
-
-class SecretWord {
-    +Char GivenWords []
-    +Char GuesserWords []
-    +boolean AddLetter(Char letter)
-    +boolean isGuesser ()
-    +printGuessedWord()
-}
-class TurnHangMan {
-    +HangManPlayer Giver
-    +HangManPlayer Guesser
-    +SecretWord secretword
-    +HangedMan hangedman
-}
-class HangedMan {   
-    +ATTEMPTS    
-    +FailedAttempts
-    +PaintHangedMan()
-    +isDead()
-}
-
-interface HangManPlayer {
-    +ChooseWord()
-    +GiveLetter()
-}
+    interface HangManPlayer {
+        +ChooseWord()
+        +GiveLetter()
+    }
 
 }
 
 package player {
-
-abstract class Player {
-    +IdPlayer int
-    +PlayerName String
-    +ThrowDice()
-}
-
-class ListOfPlayers {
-    +Player [] players
-    +CreatePlayer()
-    +GetPlayer()
-}
-
-
-class Bot {
-    +ChooseWord()
-    +GiveLetter()
-}
-class Human {
-    +ChooseWord()
-    +GiveLetter()
-}
-
+    abstract class Player {
+        +IdPlayer int
+        +PlayerName String
+        +ThrowDice()
+    }
+    class ListOfPlayers {
+        +Player [] players
+        +CreatePlayer()
+        +GetPlayer()
+    }
+    class Bot {
+        +ChooseWord()
+        +GiveLetter()
+    }
+    class Human {
+        +ChooseWord()
+        +GiveLetter()
+    }
 }
 
 package utils {
-
-class Dice {
-    +RollTheDice()
+    class Dice {
+        +RollTheDice()
+    }
 }
 
-}
-
-
-
-
-HangMan o-- Player
 HangMan *--TurnHangMan
-TurnHangMan*-- SecretWord
-TurnHangMan*-- HangedMan
+HangMan ..> ListOfPlayers
+HangMan ..> Dice
+
 Player <|-- Bot
 Player <|-- Human
-Player ..|>HangManPlayer
-TurnHangMan *-- Player
+Player ..|> HangManPlayer
+Player ..> Dice
 
-Player-->Dice
+TurnHangMan *-- HangedMan
+TurnHangMan *-- HangManPlayer
 
-HangMan ..> ListOfPlayers
-HangMan ..>Dice
+HangedMan *-- SecretWord
+
+HangManPlayer -left-> HangedMan
+
+ListOfPlayers *-- Player
 
 @enduml
