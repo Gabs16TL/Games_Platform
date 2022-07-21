@@ -10,6 +10,7 @@ public class HangMan extends Game {
     Scanner option = new Scanner(System.in);
 
     public int Introduction() {
+        return 0;
     }
 
     @Override
@@ -23,6 +24,7 @@ public class HangMan extends Game {
 
     @Override
     public int AssignRoles() {
+        return 0;
     }
 
     @Override

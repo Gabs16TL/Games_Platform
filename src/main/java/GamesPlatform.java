@@ -1,9 +1,15 @@
+import Player.ListOfPlayers;
+import Player.Player;
 import game.Game;
 import game.hangman.HangMan;
 import game.tictactoe.TicTacToe;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+
+import Player.Human;
+import Player.Bot;
 
 public class GamesPlatform {
     private final Scanner sn;
@@ -44,23 +50,43 @@ public class GamesPlatform {
     }
 
     private void createPlayer() {
+        Player player =null;
         System.out.println("Enter the new player name: ");
         String name = sn.nextLine();
-        listOfPlayers.createPlayer(new Player(name));
+
+        System.out.println("Enter type of player: ");
+        int typeOfPlayer = sn.nextInt();
+
+
+        switch (typeOfPlayer) {
+            case 1:
+                player = new Human(name);
+                break;
+            case 2:
+                player = new Bot(name);
+                break;
+            default:
+                break;
+        }
+
+        listOfPlayers.createPlayer(player);
     }
 
     private void showPlayers() {
-        Player[] players = listOfPlayers.getPlayers();
-        for (int i = 0; i < players.length; i++) {
-            if (players[i] != null)
-                System.out.println((i + 1) + ". " + players[i].getName());
+
+       List<Player> players = listOfPlayers.getList();
+        int index =0;
+        for (Player player: players) {
+            if (player != null) {
+                System.out.println((index++) + ". " + player.getPlayerName());
+            }
         }
     }
 
     private void playGame(Game game) {
-        game.introdution();
-        game.execute();
-        game.resume();
+        game.Introduction();
+        game.Execute(1);
+        game.Resume();
     }
 
 
