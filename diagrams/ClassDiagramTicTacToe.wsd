@@ -1,71 +1,67 @@
 @startuml Tictactoe
 
-
 package player {
-abstract class Player {
-    +IdPlayer int
-    +PlayerName String
-    +ThrowDice()
-}
-Class ListOfPlayer {
-    +Player [] players
-    +CreatePlayer()
-    +GetPlayer()
-}
-
-Class Human {
-    +putMark()
-}
-
-Class Bot {
-  +putMark()
-}
+    abstract class Player {
+        +IdPlayer int
+        +PlayerName String
+        +ThrowDice()
+    }
+    Class ListOfPlayer {
+        +Player [] players
+        +CreatePlayer()
+        +GetPlayer()
+    }
+    Class Human {
+        +putMark()
+    }
+    Class Bot {
+        +putMark()
+    }
 }
 
 package util {
-class Dice {
-    +RollTheDice()
-}
+    class Dice {
+        +RollTheDice()
+    }
 }
 
 package ttt {
-class TicTacToe {
-     +NumberOfPlayers
-    +TurnTicTacToe turntictactoe
-    {abstract}Introduction()
-    +Resume()
-    {abstract}Execute()
-    {abstract}AssignRoles()
-    +SelectPlayers()
-}
-interface TicTacToePlayer {
-    +putMark()
-}
-class Turn {
-    +TicTacToePlayer playerX
-    +TicTacToePlayer playerO
-    +Board board
-    +playTurn()
-    +getResult()
-}
-class Board {
-    +Piece[][] piece
-    +EmptySquare: int
-    +isFull()
-    +paintBoard()
-    +checkWinner()
-    +putPiece(int x, int y, Piece typeOfPiece)
-}
-Enum Piece {
-   X,
-   O,
-   Empty
-}
+    class TicTacToe {
+        +NumberOfPlayers
+        +TurnTicTacToe turntictactoe
+        {abstract}Introduction()
+        +Resume()
+        {abstract}Execute()
+        {abstract}AssignRoles()
+        +SelectPlayers()
+    }
+    interface TicTacToePlayer {
+        +putMark()
+    }
+    class Turn {
+        +TicTacToePlayer playerX
+        +TicTacToePlayer playerO
+        +Board board
+        +playTurn()
+        +getResult()
+    }
+    class Board {
+        +Piece[][] piece
+        +EmptySquare: int
+        +isFull()
+        +paintBoard()
+        +checkWinner()
+        +putPiece(int x, int y, Piece typeOfPiece)
+    }
+    Enum Piece {
+        X,
+        O,
+        Empty
+    }
 }
 
 TicTacToe *-- Turn
 Turn *-- TicTacToePlayer
-TicTacToe *-- Player
 Board *-- Piece
 TicTacToe ..> ListOfPlayer
 ListOfPlayer *-- Player
@@ -73,7 +69,6 @@ Turn *-- Board
 Player ..|> TicTacToePlayer
 Player <|-- Human
 Player <|-- Bot
-Turn --> Player
 TicTacToe ..> Dice
 Player ..> Dice
 
