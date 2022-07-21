@@ -14,12 +14,12 @@ import Player.Bot;
 public class GamesPlatform {
     private final Scanner sn;
     private final Game[] games;
-    private final ListOfPlayers listOfPlayers;
+    private final GamePlayersProvider listOfPlayers;
 
     public GamesPlatform() {
         sn = new Scanner(System.in);
-        games = new Game[] {new TicTacToe(), new HangMan()};
         listOfPlayers = new ListOfPlayers();
+        games = new Game[] {new TicTacToe(listOfPlayers), new HangMan(listOfPlayers)};
     }
 
     public void run() {
@@ -50,13 +50,12 @@ public class GamesPlatform {
     }
 
     private void createPlayer() {
-        Player player =null;
+        Player player = null;
         System.out.println("Enter the new player name: ");
         String name = sn.nextLine();
 
         System.out.println("Enter type of player: ");
         int typeOfPlayer = sn.nextInt();
-
 
         switch (typeOfPlayer) {
             case 1:
@@ -68,12 +67,10 @@ public class GamesPlatform {
             default:
                 break;
         }
-
         listOfPlayers.createPlayer(player);
     }
 
     private void showPlayers() {
-
        List<Player> players = listOfPlayers.getList();
         int index =0;
         for (Player player: players) {
@@ -88,7 +85,6 @@ public class GamesPlatform {
         game.Execute();
         game.Resume();
     }
-
 
     private void showMenu() {
         System.out.println("\n***************************");
