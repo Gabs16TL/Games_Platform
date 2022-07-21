@@ -46,13 +46,15 @@ package ttt {
         +getResult()
     }
     class Board {
-        +Piece[][] piece
-        +EmptySquare: int
-        +isFull()
-        +paintBoard()
-        +checkWinner()
-        +putPiece(int x, int y, Piece typeOfPiece)
-    }
+            +Piece[][] pieces
+            +EmptySquare: int
+            +Piece[][] createBoard()
+            +paintBoard()
+            +isFull()
+            +boolean checkMovement(int x, int y, Piece piece)
+            +checkWinner(Piece box)
+            +putPiece(int x, int y, Piece typeOfPiece)
+        }
     Enum Piece {
         X,
         O,

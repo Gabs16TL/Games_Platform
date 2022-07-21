@@ -1,61 +1,74 @@
 package game.tictactoe;
 
 public class Board {
-    private char[][] board = new char[3][3];
+    private Piece[][] pieces = new Piece[3][3];
+    //public int EmptySquare;
 
-    public char[][] CreateBoard() {
-        for (char[] row : board) {
-            for (char piece : row) {
-                piece = ' ';
+    public Piece[][] createBoard() {
+        for (Piece[] row : pieces) {
+            for (Piece pieces : row) {
+                pieces = Piece.Empty;
             }
         }
-        return board;
+        return pieces;
     }
 
-    public void PaintBoard() {
+    public void paintBoard() {
         System.out.println("-------------");
-        for (char[] row : board) {
+        for (Piece[] row : pieces) {
             System.out.println("| " + row[0] + " | " + row[1] + " | " + row[2] + " | ");
             System.out.println("-------------");
         }
     }
 
-    public void Movement(int x, int y, char piece) {
-        if (piece == 'X') {
+    public void putPiece(Position position, Piece piece) {
+        int x = position.getX();
+        int y = position.getY();
+
+        if (piece == Piece.X) {
             x--;
             y--;
         }
-        board[x][y] = piece;
+        pieces[x][y] = piece;
     }
 
-    public boolean fullBoard() {
-        for (char[] row : board) {
-            for (char piece : row) {
-                if (piece == ' ') return false;
+    public boolean isFull() {
+        for (Piece[] row : pieces) {
+            for (Piece piece : row) {
+                if (piece == Piece.Empty) return false;
             }
         }
         return true;
     }
 
-    public boolean checkMovement(int x, int y, char piece) {
-        if (piece == 'X') {
+    public boolean checkMovement(Position position, Piece piece) {
+        int x = position.getX();
+        int y = position.getY();
+
+        if (piece == Piece.X) {
             x--;
             y--;
         }
         if (x > 3 || y > 3) return false;
-        if (board[x][y] != 'X' && board[x][y] != 'O') return true;
+
+        if (pieces[x][y] != Piece.X && pieces[x][y] != Piece.O) return true;
+
+        /*if (pieces[position.getX()][position.getY()] !=
+                Piece.X && pieces[position.getX()][position.getY()] !=
+                Piece.O)
+            return true;*/
         return false;
     }
 
-    public boolean checkWinner(char box) {
-        if ((board[0][0] == box && board[0][1] == box && board[0][2] == box) ||
-                (board[1][0] == box && board[1][1] == box && board[1][2] == box) ||
-                (board[2][0] == box && board[2][1] == box && board[2][2] == box) ||
-                (board[0][0] == box && board[1][0] == box && board[2][0] == box) ||
-                (board[0][1] == box && board[1][1] == box && board[2][1] == box) ||
-                (board[0][2] == box && board[1][2] == box && board[2][2] == box) ||
-                (board[0][0] == box && board[1][1] == box && board[2][2] == box) ||
-                (board[0][2] == box && board[1][1] == box && board[2][0] == box)) {
+    public boolean checkWinner(Piece box) {
+        if ((pieces[0][0] == box && pieces[0][1] == box && pieces[0][2] == box) ||
+                (pieces[1][0] == box && pieces[1][1] == box && pieces[1][2] == box) ||
+                (pieces[2][0] == box && pieces[2][1] == box && pieces[2][2] == box) ||
+                (pieces[0][0] == box && pieces[1][0] == box && pieces[2][0] == box) ||
+                (pieces[0][1] == box && pieces[1][1] == box && pieces[2][1] == box) ||
+                (pieces[0][2] == box && pieces[1][2] == box && pieces[2][2] == box) ||
+                (pieces[0][0] == box && pieces[1][1] == box && pieces[2][2] == box) ||
+                (pieces[0][2] == box && pieces[1][1] == box && pieces[2][0] == box)) {
             return true;
         }
         return false;
