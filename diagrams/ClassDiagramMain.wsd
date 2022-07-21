@@ -58,7 +58,6 @@ GamesPlatform *-- ListOfPlayers
 
 Game <|-- TicTacToe
 Game <|-- HangMan
-Game o--Player
 Player <|-- Bot
 Player <|-- Human
 Player ..|>HangManPlayer
