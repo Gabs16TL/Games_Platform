@@ -3,9 +3,10 @@ package Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOfPlayers {
+public class ListOfPlayers implements GamePlayersProvider{
 
      List<Player> playerList = new ArrayList<Player>();
+
 
 
      public void createPlayer(Player player) {
@@ -24,12 +25,13 @@ public class ListOfPlayers {
 
 
 
-
  public List<Player> getList() {
      return playerList;
  }
 
 
+    @Override
+    public void getGamePlayers() {
 
-
+    }
 }

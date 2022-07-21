@@ -1,5 +1,6 @@
 package game.tictactoe;
 
+import Player.GamePlayersProvider;
 import game.Game;
 
 import java.util.Random;
@@ -11,6 +12,10 @@ public class TicTacToe extends Game {
     private final Random rand = new Random();
     TicTacToe ttt;
     Scanner sn = new Scanner(System.in);
+
+    public TicTacToe(GamePlayersProvider gamePlayersProvider) {
+        super(gamePlayersProvider);
+    }
 
     public void Introduction() {
 

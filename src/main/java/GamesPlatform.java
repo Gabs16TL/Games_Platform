@@ -10,16 +10,18 @@ import java.util.Scanner;
 
 import Player.Human;
 import Player.Bot;
+import Player.GamePlayersProvider;
 
 public class GamesPlatform {
     private final Scanner sn;
     private final Game[] games;
-    private final GamePlayersProvider listOfPlayers;
+    private final ListOfPlayers listOfPlayers;
 
     public GamesPlatform() {
         sn = new Scanner(System.in);
         listOfPlayers = new ListOfPlayers();
         games = new Game[] {new TicTacToe(listOfPlayers), new HangMan(listOfPlayers)};
+
     }
 
     public void run() {

@@ -2,7 +2,7 @@ package Player;
 
 import java.util.Random;
 
-public abstract class Player {
+public abstract class Player implements GamePlayer{
 
     private int idPlayer;
     private String playerName;

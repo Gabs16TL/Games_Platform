@@ -1,8 +1,17 @@
 package game;
 
+import Player.GamePlayersProvider;
+
 import java.util.Scanner;
 
 public abstract class Game {
+
+
+    private GamePlayersProvider gamePlayersProvider;
+
+    public Game(GamePlayersProvider gamePlayersProvider) {
+        this.gamePlayersProvider = gamePlayersProvider;
+    }
 
     public int NumberOfPlayers;
 
