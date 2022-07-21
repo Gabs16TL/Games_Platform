@@ -85,7 +85,7 @@ public class GamesPlatform {
 
     private void playGame(Game game) {
         game.Introduction();
-        game.Execute(1);
+        game.Execute();
         game.Resume();
     }
 

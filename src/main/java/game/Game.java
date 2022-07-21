@@ -6,11 +6,11 @@ public abstract class Game {
 
     public int NumberOfPlayers;
 
-    public abstract int Introduction();
+    public abstract void Introduction();
 
-    public abstract int Execute(int option);
+    public abstract void Execute();
 
-    public abstract int AssignRoles();
+    public abstract void AssignRoles();
 
     public void Resume() {
     }

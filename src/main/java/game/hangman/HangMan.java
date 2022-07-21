@@ -9,8 +9,7 @@ public class HangMan extends Game {
     TurnHangMan turnhangman;
     Scanner option = new Scanner(System.in);
 
-    public int Introduction() {
-        return 0;
+    public void Introduction() {
     }
 
     @Override
@@ -18,13 +17,11 @@ public class HangMan extends Game {
     }
 
     @Override
-    public int Execute(int option) {
-        return 0;
+    public void Execute() {
     }
 
     @Override
-    public int AssignRoles() {
-        return 0;
+    public void AssignRoles() {
     }
 
     @Override

@@ -1,12 +1,12 @@
 package game.tictactoe;
+
 import game.Game;
 
 public class TicTacToe extends Game {
     public int NumberOfPlayers;
     TicTacToe ttt;
 
-    public int Introduction() {
-        return 0;
+    public void Introduction() {
     }
 
     @Override
@@ -14,13 +14,13 @@ public class TicTacToe extends Game {
     }
 
     @Override
-    public int Execute(int option) {
-        return 0;
+    public void Execute() {
+
     }
 
     @Override
-    public int AssignRoles() {
-        return 0;
+    public void AssignRoles() {
+
     }
 
     @Override
