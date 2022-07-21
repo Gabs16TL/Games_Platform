@@ -1,6 +1,8 @@
 package game.tictactoe;
 
 import Player.GamePlayersProvider;
+import Player.Player;
+import Player.Bot;
 import game.Game;
 
 import java.util.Random;
@@ -30,7 +32,9 @@ public class TicTacToe extends Game {
     @Override
     public void Execute() {
         Board board = new Board();
-
+        Player player1 = SelectPlayers();
+        Player player2 = SelectPlayers();
+        Player[] players = AssignRoles(player1, player2);
         board.CreateBoard();
         board.PaintBoard();
         System.out.println("Welcome to Tic-Tac-Toe");
@@ -76,12 +80,13 @@ public class TicTacToe extends Game {
 
 
     @Override
-    public void AssignRoles() {
-
+    public Player[] AssignRoles(Player player1, Player player2) {
+        return new Player[0];
     }
 
     @Override
-    public void SelectPlayers() {
+    public Player SelectPlayers() {
+        return new Bot("");
     }
 
 }

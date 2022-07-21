@@ -1,6 +1,8 @@
 package Player;
 
 
+import game.tictactoe.Position;
+
 public class Bot extends Player{
 
     public Bot(String playerName) {
@@ -23,8 +25,8 @@ public class Bot extends Player{
     }
 
     @Override
-    public char putMark() {
-        return 0;
+    public Position putMark() {
+        return new Position(1,1);
     }
 
 

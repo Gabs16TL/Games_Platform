@@ -1,5 +1,7 @@
 package Player;
 
+import game.tictactoe.Position;
+
 public interface TicTacToePlayer {
-    char putMark();
+    Position putMark();
 }

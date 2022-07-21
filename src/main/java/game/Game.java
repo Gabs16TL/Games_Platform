@@ -1,13 +1,14 @@
 package game;
 
 import Player.GamePlayersProvider;
+import Player.Player;
 
 import java.util.Scanner;
 
 public abstract class Game {
 
 
-    private GamePlayersProvider gamePlayersProvider;
+    protected GamePlayersProvider gamePlayersProvider;
 
     public Game(GamePlayersProvider gamePlayersProvider) {
         this.gamePlayersProvider = gamePlayersProvider;
@@ -19,11 +20,10 @@ public abstract class Game {
 
     public abstract void Execute();
 
-    public abstract void AssignRoles();
+    public abstract Player[] AssignRoles(Player player1, Player player2);
 
     public void Resume() {
     }
 
-    public void SelectPlayers() {
-    }
+    public abstract Player SelectPlayers();
 }

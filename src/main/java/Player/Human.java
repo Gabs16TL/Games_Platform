@@ -1,6 +1,8 @@
 package Player;
 
 
+import game.tictactoe.Position;
+
 public class Human extends Player{
     public Human(String playerName) {
         super(playerName);
@@ -22,8 +24,8 @@ public class Human extends Player{
     }
 
     @Override
-    public char putMark() {
-        return 0;
+    public Position putMark() {
+        return new Position(0,0);
     }
 
 

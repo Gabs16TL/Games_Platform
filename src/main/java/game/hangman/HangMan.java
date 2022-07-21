@@ -1,6 +1,8 @@
 package game.hangman;
 
 import Player.GamePlayersProvider;
+import Player.Player;
+import Player.Bot;
 import game.Game;
 
 import java.util.Scanner;
@@ -27,11 +29,12 @@ public class HangMan extends Game {
     }
 
     @Override
-    public void AssignRoles() {
+    public Player[] AssignRoles(Player player1, Player player2) {
+        return new Player[0];
     }
 
     @Override
-    public void SelectPlayers() {
-
+    public Player SelectPlayers() {
+        return new Bot("");
     }
 }
