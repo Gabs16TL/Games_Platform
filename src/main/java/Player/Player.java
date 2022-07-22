@@ -5,39 +5,31 @@ import game.GamePlayer;
 import java.util.Random;
 
 public abstract class Player implements GamePlayer {
+    private int id;
+    private String name;
 
-    private int idPlayer;
-    private String playerName;
-
-
-    public Player(String playerName) {
-        this.playerName = playerName;
+    public Player(String name) {
+        this.name = name;
     }
 
-
-    public int getIdPlayer() {
-        return idPlayer;
+    public int getId() {
+        return id;
     }
 
-    public void setIdPlayer(int idPlayer) {
-        this.idPlayer = idPlayer;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getName() {
+        return name;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int throwDice() {
-        Random rd = new Random();
-        int flip = rd.nextInt(1) + 0;
-
-        if (flip == 0)
-            return 0;
-        else
-            return 1;
+    @Override
+    public String toString() {
+        return getName();
     }
 }

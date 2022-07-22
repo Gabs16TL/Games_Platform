@@ -3,7 +3,10 @@ package Player;
 
 import game.tictactoe.Position;
 
-public class Human extends Player{
+import java.util.Scanner;
+
+public class Human extends Player {
+    private final Scanner sn = new Scanner(System.in);
     public Human(String playerName) {
         super(playerName);
     }
@@ -15,19 +18,23 @@ public class Human extends Player{
 
     @Override
     public String chooseWord() {
-        return null;
+        System.out.println("\nEnter the secret word: ");
+        return sn.nextLine();
     }
 
     @Override
     public char giveLetter() {
-        return 0;
+        System.out.println("\nEnter a letter: ");
+        return sn.nextLine().charAt(0);
     }
 
     @Override
     public Position putMark() {
-        return new Position(0,0);
+        System.out.println("Enter position X: ");
+        int x = sn.nextInt();
+        System.out.println("Enter position Y: ");
+        int y = sn.nextInt();
+        return new Position(x,y);
     }
-
-
 
 }
