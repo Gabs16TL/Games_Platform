@@ -1,24 +1,25 @@
 @startuml
 
 class GamesPlatform {
-    +GamePlayersProvider listOfPlayers
-    +showPlayersList()
+    -ListOfPlayers listOfPlayers
+    -Game[] games
+    +showPlayers()
     +createPlayer()
-    +PlayGame(Game game)
-    +Game[] games
-    +ShowMenu()
+    +playGame(Game game)
+    +showMenu()
+    +run()
 }
 
 package game {
     abstract class Game {
-        - GamePlayer[] gamePlayers
-        - GamePlayersProvider gamePlayersProvider
-        +NumberOfPlayers
-        {abstract}Introduction()
-        +Resume()
-        {abstract}Execute()
-        {abstract}AssignRoles()
-        +SelectPlayers()
+        # GamePlayer[] gamePlayers
+        # GamePlayersProvider gamePlayersProvider
+        # List<GamePlayer> results
+        + Introduction()
+        + Resume()
+        + {abstract}Execute()
+        # AssignRoles (GamePlayer[] gamePlayers)
+        # flipRoles (GamePlayer[] gamePlayers)
     }
     package tictactoe {
         class TicTacToe {
@@ -30,30 +31,45 @@ package game {
     }
     package hangman {
         class HangMan {
-            
+
         }
         interface HangManPlayer{
 
         }
     }
+
     interface GamePlayer {
-        + processResult(Result)
+        + processResult(int)
     }
     interface GamePlayersProvider {
         + getGamePlayers(int) : GamePlayer[]
     }
+
+    package utils {
+        class Dice{
+            + int generateValue(int bound)
+        }
+    }
+
 }
 
 package player {
     abstract class Player {
-        +IdPlayer int
-        +PlayerName String
-        +ThrowDice()
+        +id int
+        +name String
+        +Player (String name)
+        +getId()
+        +setId()
+        +getName()
+        +setName()
     }
     class ListOfPlayers {
-        +Player[] players
-        +CreatePlayer()
-        +GetPlayer()
+        +List<Player> playersList
+        +createPlayer(Player player)
+        +getPlayer(int id)
+        +getList()
+        +printList()
+        +getGamePlayers(int size)
     }
     class Bot {
 
@@ -63,8 +79,9 @@ package player {
     }
 }
 
+
 GamesPlatform *-- "2" Game
-GamesPlatform *-- GamePlayersProvider
+GamesPlatform *-- ListOfPlayers
 
 Game <|-- TicTacToe
 Game <|-- HangMan
@@ -75,6 +92,10 @@ Player <|-- Human
 Player ..|> GamePlayer
 
 Game *-- GamePlayer
+
+
+Dice <.. Game
+Dice <.. GamePlayer
 
 ListOfPlayers *-- Player
 ListOfPlayers ..|> GamePlayersProvider

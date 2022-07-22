@@ -2,14 +2,21 @@
 
 package player {
     abstract class Player {
-        +IdPlayer int
-        +PlayerName String
-        +ThrowDice()
+        +id int
+        +name String
+        +Player (String name)
+        +getId()
+        +setId()
+        +getName()
+        +setName()
     }
-    Class ListOfPlayer {
-        +Player [] players
-        +CreatePlayer()
-        +GetPlayer()
+    class ListOfPlayers {
+        +List<Player> playersList
+        +createPlayer(Player player)
+        +getPlayer(int id)
+        +getList()
+        +printList()
+        +getGamePlayers(int size)
     }
     Class Human {
         +putMark()
@@ -19,59 +26,83 @@ package player {
     }
 }
 
+interface GamePlayer {
+    + processResult(int)
+}
+interface GamePlayersProvider {
+    + getGamePlayers(int) : GamePlayer[]
+}
+
 package util {
-    class Dice {
-        +RollTheDice()
+    class Dice{
+        +generateValue (int bound)
     }
 }
 
 package ttt {
     class TicTacToe {
-        +NumberOfPlayers
-        +TurnTicTacToe turntictactoe
-        {abstract}Introduction()
-        +Resume()
-        {abstract}Execute()
-        {abstract}AssignRoles()
-        +SelectPlayers()
+        # GamePlayer[] gamePlayers
+        # GamePlayersProvider gamePlayersProvider
+        # List<GamePlayer> results
+        + Introduction()
+        + Resume()
+        + Execute()
+        # AssignRoles (GamePlayer[] gamePlayers)
+        # flipRoles (GamePlayer[] gamePlayers)
     }
     interface TicTacToePlayer {
         +putMark()
     }
-    class Turn {
+    class TurnTicTacToe {
         +TicTacToePlayer playerX
         +TicTacToePlayer playerO
+        -TicTacToePlayer result
         +Board board
-        +playTurn()
+        +play()
+        -setResult()
         +getResult()
     }
     class Board {
-            +Piece[][] pieces
-            +EmptySquare: int
-            +Piece[][] createBoard()
-            +paintBoard()
-            +isFull()
-            +boolean checkMovement(int x, int y, Piece piece)
-            +checkWinner(Piece box)
-            +putPiece(int x, int y, Piece typeOfPiece)
-        }
+        +Piece[][] squares
+        +EmptySquare = 9
+        +createBoard()
+        +paintBoard()
+        +isFull()
+        +putPiece (Position position, Piece piece)
+        +getWinner()
+        -checkRows()
+        -checkColumns()
+        -checkDiagonals()
+    }
     Enum Piece {
         X,
         O,
-        Empty
+        NULL
     }
 }
 
-TicTacToe *-- Turn
-Turn *-- TicTacToePlayer
+TicTacToe *-- TurnTicTacToe
+TurnTicTacToe *-- TicTacToePlayer
 Board *-- Piece
-TicTacToe ..> ListOfPlayer
-ListOfPlayer *-- Player
-Turn *-- Board
-Player ..|> TicTacToePlayer
+
+ListOfPlayers *-- Player
+TurnTicTacToe *-- Board
+
+Player ..|> GamePlayer
 Player <|-- Human
 Player <|-- Bot
+
 TicTacToe ..> Dice
-Player ..> Dice
+
+TicTacToe -up-> GamePlayersProvider
+
+Dice <.. GamePlayer
+ListOfPlayers ..|> GamePlayersProvider
+
+TicTacToe *-- GamePlayer
+
+TicTacToePlayer-->Board
+
+GamePlayer --|>  TicTacToePlayer
 
 @enduml

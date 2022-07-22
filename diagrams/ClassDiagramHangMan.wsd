@@ -2,32 +2,38 @@
 
 package hangman {
     class HangMan {
-        +NumberOfPlayers
-        +TurnHangMan turnhangman
-        {abstract}Introduction()
-        +Resume()
-        {abstract}Execute()
-        {abstract}AssignRoles()
-        +SelectPlayers()
+        # GamePlayer[] gamePlayers
+        # GamePlayersProvider gamePlayersProvider
+        # List<GamePlayer> results
+        + Introduction()
+        + Resume()
+        + Execute()
+        # AssignRoles (GamePlayer[] gamePlayers)
+        # flipRoles (GamePlayer[] gamePlayers)
     }
     class SecretWord {
-        +Char GivenWords []
         +Char GuesserWords []
+        +Char SecretWord []
         +boolean AddLetter(Char letter)
-        +boolean isGuesser ()
-        +printGuessedWord()
+        +boolean isGuessed ()
+        +printWord()
     }
     class TurnHangMan {
         +HangManPlayer Giver
         +HangManPlayer Guesser
-        +SecretWord secretword
         +HangedMan hangedman
+        +HangManPlayer result
+        +play()
+        +getResult()
     }
-    class HangedMan {   
-        +ATTEMPTS    
-        +FailedAttempts
+    class HangedMan {
+        -FailedAttempts
+        -SecretWord secretWord
         +PaintHangedMan()
         +isDead()
+        +isSaved()
+        -addPart()
+        +tryLetter()
     }
     interface HangManPlayer {
         +ChooseWord()
@@ -37,14 +43,21 @@ package hangman {
 
 package player {
     abstract class Player {
-        +IdPlayer int
-        +PlayerName String
-        +ThrowDice()
+        +id int
+        +name String
+        +Player (String name)
+        +getId()
+        +setId()
+        +getName()
+        +setName()
     }
     class ListOfPlayers {
-        +Player [] players
-        +CreatePlayer()
-        +GetPlayer()
+        +List<Player> playersList
+        +createPlayer(Player player)
+        +getPlayer(int id)
+        +getList()
+        +printList()
+        +getGamePlayers(int size)
     }
     class Bot {
         +ChooseWord()
@@ -57,16 +70,16 @@ package player {
 }
 
 interface GamePlayersProvider {
-        + getGamePlayers(int) : GamePlayer[]
+    + getGamePlayers(int) : GamePlayer[]
 }
 
 interface GamePlayer {
-        + processResult(Result)
+    + processResult(Result)
 }
 
 package utils {
     class Dice {
-        +RollTheDice()
+        +generateValue(int bound)
     }
 }
 
@@ -77,7 +90,7 @@ HangMan *-- GamePlayer
 
 Player <|-- Bot
 Player <|-- Human
-Player .left.|> GamePlayer
+Player .up.|> GamePlayer
 
 TurnHangMan *-- HangedMan
 TurnHangMan *-- HangManPlayer
@@ -89,5 +102,7 @@ HangManPlayer <|-- GamePlayer
 
 ListOfPlayers *-- Player
 ListOfPlayers .up.|> GamePlayersProvider
+
+GamePlayer ..>Dice
 
 @enduml
