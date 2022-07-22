@@ -20,7 +20,6 @@ public class GamesPlatform {
         sn = new Scanner(System.in);
         listOfPlayers = new ListOfPlayers();
         games = new Game[] {new TicTacToe(listOfPlayers), new HangMan(listOfPlayers)};
-
     }
 
     public void run() {
@@ -55,7 +54,7 @@ public class GamesPlatform {
         System.out.println("Enter the new player name: ");
         String name = sn.nextLine();
 
-        System.out.println("Enter type of player: ");
+        System.out.println("Enter type of player <1>Human <2>Bot: ");
         int typeOfPlayer = sn.nextInt();
 
         switch (typeOfPlayer) {
@@ -73,10 +72,9 @@ public class GamesPlatform {
 
     private void showPlayers() {
        List<Player> players = listOfPlayers.getList();
-        int index =0;
         for (Player player: players) {
             if (player != null) {
-                System.out.println((index++) + ". " + player.getPlayerName());
+                System.out.println((player.getId()) + ". " + player.getName());
             }
         }
     }
