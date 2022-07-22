@@ -29,12 +29,10 @@ package hangman {
         +PaintHangedMan()
         +isDead()
     }
-
     interface HangManPlayer {
         +ChooseWord()
         +GiveLetter()
     }
-
 }
 
 package player {
@@ -58,6 +56,14 @@ package player {
     }
 }
 
+interface GamePlayersProvider {
+        + getGamePlayers(int) : GamePlayer[]
+}
+
+interface GamePlayer {
+        + processResult(Result)
+}
+
 package utils {
     class Dice {
         +RollTheDice()
@@ -65,13 +71,13 @@ package utils {
 }
 
 HangMan *--TurnHangMan
-HangMan ..> ListOfPlayers
-HangMan ..> Dice
+HangMan --> GamePlayersProvider
+HangMan .right.> Dice
+HangMan *-- GamePlayer
 
 Player <|-- Bot
 Player <|-- Human
-Player ..|> HangManPlayer
-Player ..> Dice
+Player .left.|> GamePlayer
 
 TurnHangMan *-- HangedMan
 TurnHangMan *-- HangManPlayer
@@ -79,7 +85,9 @@ TurnHangMan *-- HangManPlayer
 HangedMan *-- SecretWord
 
 HangManPlayer -left-> HangedMan
+HangManPlayer <|-- GamePlayer
 
 ListOfPlayers *-- Player
+ListOfPlayers .up.|> GamePlayersProvider
 
 @enduml

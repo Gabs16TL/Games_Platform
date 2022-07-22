@@ -1,8 +1,10 @@
 package Player;
 
+import game.GamePlayer;
+
 import java.util.Random;
 
-public abstract class Player implements GamePlayer{
+public abstract class Player implements GamePlayer {
 
     private int idPlayer;
     private String playerName;

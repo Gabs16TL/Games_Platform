@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import Player.Human;
 import Player.Bot;
-import Player.GamePlayersProvider;
 
 public class GamesPlatform {
     private final Scanner sn;

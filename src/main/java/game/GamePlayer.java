@@ -1,6 +1,9 @@
-package Player;
+package game;
 
 
-public interface GamePlayer extends HangManPlayer, TicTacToePlayer{
+import game.hangman.HangManPlayer;
+import game.tictactoe.TicTacToePlayer;
+
+public interface GamePlayer extends HangManPlayer, TicTacToePlayer {
       void processResult(int result);
 }

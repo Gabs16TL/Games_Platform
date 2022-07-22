@@ -1,8 +1,8 @@
-package Player;
+package game;
 
 import java.util.List;
 
 public interface GamePlayersProvider {
-    void getGamePlayers();
+    GamePlayer[] getGamePlayers(int size);
 
 }

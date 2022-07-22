@@ -1,5 +1,8 @@
 package Player;
 
+import game.GamePlayer;
+import game.GamePlayersProvider;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class ListOfPlayers implements GamePlayersProvider {
 
 
     @Override
-    public void getGamePlayers() {
-
+    public GamePlayer[] getGamePlayers(int size) {
+        return new GamePlayer[0];
     }
 }
