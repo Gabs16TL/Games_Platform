@@ -2,6 +2,7 @@ package game.hangman;
 
 public class HangedMan {
     private int failedAttemps = 0;
+    private final int MAX_NUMBER_OF_ATTEMPTS = 6;
     private final SecretWord secretWord;
 
     public HangedMan(String secretWord) {
@@ -31,7 +32,7 @@ public class HangedMan {
     }
 
     public boolean isDead() {
-        return failedAttemps >= 6;
+        return failedAttemps >= MAX_NUMBER_OF_ATTEMPTS;
     }
 
     private void addPart() {
