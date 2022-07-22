@@ -1,6 +1,4 @@
-package Player;
-
-import game.tictactoe.Position;
+package game.tictactoe;
 
 public interface TicTacToePlayer {
     Position putMark();
