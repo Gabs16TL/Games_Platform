@@ -1,33 +1,38 @@
 package game.hangman;
 
-import game.GamePlayersProvider;
-import game.GamePlayer;
-import Player.Bot;
 import game.Game;
+import game.GamePlayer;
+import game.GamePlayersProvider;
+
+import java.util.ArrayList;
 
 public class HangMan extends Game {
+    private final int GIVER = 0;
+    private final int GUESSER = 1;
     private final int NUMBER_OF_TURNS = 2;
     private final int NUMBER_OF_PLAYERS = 2;
-    private final GamePlayer[] gamePlayers;
+    private TurnHangMan turnHangMan;
 
     public HangMan(GamePlayersProvider gamePlayersProvider) {
-        gamePlayers = gamePlayersProvider.getGamePlayers(NUMBER_OF_PLAYERS);
+        super(gamePlayersProvider);
     }
 
     @Override
     public void Execute() {
-        GamePlayer[] roles = AssignRoles();
+        results = new ArrayList<>();
+        gamePlayers = gamePlayersProvider.getGamePlayers(NUMBER_OF_PLAYERS);
+        GamePlayer[] roles = AssignRoles(gamePlayers);
         for (int i = 0; i < NUMBER_OF_TURNS; i++) {
-            turnHangMan = new TurnHangMan(gamePlayer1, gamePlayer2);
-            System.out.println("Preparing a new turn...\n");
-            System.out.println("Giver: " + roles[0].getName());
-            System.out.println("Guesser: " + roles[1].getName());
-            turnHangMan = new TurnHangMan(roles[0], roles[1]);
+            turnHangMan = new TurnHangMan(roles[GIVER], roles[GUESSER]);
+            System.out.println("\nPreparing a new turn...\n");
+            System.out.println("Giver: " + roles[GIVER]);
+            System.out.println("Guesser: " + roles[GUESSER]);
             turnHangMan.play();
-            //if (turnHangMan.getResult() != null) {
-                //turnHangMan.add(turnHangMan.getResult()); Results assignment
-            //}
-            roles = flipTurns(roles);
+            if (turnHangMan.getResult() != null) {
+                results.add((GamePlayer) turnHangMan.getResult());
+            }
+            roles = flipRoles(roles);
         }
     }
+
 }
