@@ -1,9 +1,12 @@
 package Player;
 
 
+import game.tictactoe.Board;
+import game.tictactoe.Piece;
 import game.tictactoe.Position;
+import util.Dice;
 
-public class Bot extends Player{
+public class Bot extends Player {
 
     public Bot(String playerName) {
         super(playerName);
@@ -11,23 +14,33 @@ public class Bot extends Player{
 
     @Override
     public void processResult(int result) {
-
     }
 
     @Override
     public String chooseWord() {
-        return null;
+        String[] Words = new String[3];
+        Words[0] = "HELLO";
+        Words[1] = "EXAMPLE";
+        Words[2] = "FRIDAY";
+
+        return Words[Dice.generateValue(3)];
     }
 
     @Override
     public char giveLetter() {
-        return 0;
+        String letter = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        return letter.charAt(Dice.generateValue(letter.length()));
     }
 
     @Override
     public Position putMark() {
-        return new Position(1,1);
+        int row = Dice.generateValue(4);
+        int column = Dice.generateValue(4);
+        Piece[][] board = new Board().getBoard();
+        while (row <= 0 || column <= 0 || board[row - 1][column - 1] != null) {
+            row = Dice.generateValue(3);
+            column = Dice.generateValue(3);
+        }
+        return new Position(row, column);
     }
-
-
 }

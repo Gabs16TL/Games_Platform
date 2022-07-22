@@ -34,7 +34,7 @@ public class ListOfPlayers implements GamePlayersProvider {
         return playersList;
     }
 
-    private void printList() {
+    public void printList() {
         System.out.println("\nPlayers list: ");
         for (Player player : playersList) {
             System.out.println(player.getId() + ". " + player.getName());
