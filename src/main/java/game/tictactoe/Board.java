@@ -76,5 +76,8 @@ public class Board {
         return piece;
     }
 
+    public Piece[][] getBoard() {
+        return squares;
+    }
 }
 
