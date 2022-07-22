@@ -1,20 +1,21 @@
 package game.hangman;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class SecretWord {
     public char[] secretWord;
     public char[] guessedWord;
 
     public SecretWord(String secretWord) {
-        this.secretWord = secretWord.toCharArray();
+        this.secretWord = secretWord.toLowerCase().toCharArray();
         this.guessedWord = new char[this.secretWord.length];
     }
 
     public boolean AddLetter(char letter) {
         boolean result = false;
         for (int i = 0; i < secretWord.length; i++) {
-            if (secretWord[i] == letter) {
+            if (String.valueOf(secretWord[i]).equalsIgnoreCase(String.valueOf(letter))) {
                 guessedWord[i] = letter;
                 result = true;
             }
