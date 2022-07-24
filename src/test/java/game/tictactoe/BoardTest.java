@@ -1,8 +1,10 @@
 package game.tictactoe;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.*;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.*;
 
 
 public class BoardTest {
@@ -10,23 +12,22 @@ public class BoardTest {
     Piece[][] squares = new Piece[3][3];
     Position position;
     Piece piece;
+    int EmptySquare;
 
     @Before
     public void init() {
-        board.createBoard();
         position = new Position(1, 1);
         piece = Piece.X;
         board.putPiece(position, piece);
+        EmptySquare = 0;
     }
 
     @Test
     public void testCreateBoard() {
-
     }
 
     @Test
     public void testPaintBoard() {
-
     }
 
     @Test
@@ -39,13 +40,18 @@ public class BoardTest {
 
     @Test
     public void testIsFull() {
+        assertTrue(EmptySquare <= 0);
     }
 
     @Test
     public void testGetWinner() {
+        Piece pieceWinner = Piece.Null;
+        assertEquals("-", pieceWinner.toString());
     }
 
     @Test
     public void testGetBoard() {
+        Assert.assertEquals(board.getBoard(), squares);
     }
+
 }
