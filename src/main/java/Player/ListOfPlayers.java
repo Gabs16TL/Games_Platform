@@ -31,7 +31,7 @@ public class ListOfPlayers implements GamePlayersProvider {
     }
 
     public List<Player> getList() {
-        return playersList;
+            return playersList;
     }
 
     public void printList() {

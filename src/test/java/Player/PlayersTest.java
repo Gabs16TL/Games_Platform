@@ -2,6 +2,7 @@ package Player;
 
 import org.junit.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,27 +16,21 @@ public class PlayersTest {
     @Before
     public void init() {
         player = new Human("Antonio");
-        player = new Human("Jesus");
         player.setId(1);
         listOfPlayers = new ListOfPlayers();
-      //  listOfPlayers.createPlayer(new Human("Antonio"));
-
-
+        listOfPlayers.createPlayer(new Human("Antonio"));
     }
-
-
 
     @Test
     public void testCreatePlayer() {
         player = new Human("Manuel");
         listOfPlayers.createPlayer(player);
-        assertNotNull(player);
         System.out.println("CreatePlayer: " + listOfPlayers.getList());
     }
 
     @Test
     public void testGetPlayer() {
-        Player p = listOfPlayers.getPlayer(2);
+        Player p = listOfPlayers.getPlayer(1);
         assertEquals(player.getName(), p.getName());
     }
 
@@ -50,12 +45,11 @@ public class PlayersTest {
 
 
         //1. Check List Size
-        assertThat(playerList.size(), is(2));
+        assertThat(playerList.size(), is(3));
 
 
         //2. check empty list
         assertThat("Not Empty", listOfPlayers.playersList.isEmpty(), is(false));
-
 
     }
 
