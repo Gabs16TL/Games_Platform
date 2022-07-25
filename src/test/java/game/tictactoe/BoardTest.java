@@ -8,18 +8,18 @@ import static org.junit.Assert.*;
 
 
 public class BoardTest {
-    Board board = new Board();
+    Board board;
     Piece[][] squares = new Piece[3][3];
     Position position;
     Piece piece;
-    int EmptySquare;
 
     @Before
     public void init() {
+        board = new Board();
+        board.createBoard();
         position = new Position(1, 1);
         piece = Piece.X;
         board.putPiece(position, piece);
-        EmptySquare = 0;
     }
 
     @Test
@@ -33,14 +33,19 @@ public class BoardTest {
     @Test
     public void testPutPiece() {
         Board b = new Board();
-        Position p = new Position(2, 2);
-        Piece pi = Piece.X;
+        Position p = new Position(3, 3);
+        Piece pi = Piece.O;
         assertEquals(board.putPiece(position, piece), b.putPiece(p, pi));
     }
 
     @Test
     public void testIsFull() {
-        assertTrue(EmptySquare <= 0);
+        for (int i = 1; i <= squares.length; i++) {
+            board.putPiece(new Position(i, 1), Piece.X);
+            board.putPiece(new Position(i, 2), Piece.O);
+            board.putPiece(new Position(i, 3), Piece.X);
+        }
+        assertTrue(board.isFull());
     }
 
     @Test
@@ -51,7 +56,7 @@ public class BoardTest {
 
     @Test
     public void testGetBoard() {
-        Assert.assertEquals(board.getBoard(), squares);
+        assertArrayEquals(board.getBoard(), squares);
     }
 
 }
